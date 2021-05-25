@@ -34,7 +34,7 @@ day_before_yesterday_closing_price = day_before_yesterday_data["4. close"]
 # finding the difference between the closing prices
 difference = (float(yesterday_closing_price) - float(day_before_yesterday_closing_price))
 up_down = None
-if difference > 0:
+if difference > 5:
     up_down = "🔺"
 else:
     up_down = "🔻"
