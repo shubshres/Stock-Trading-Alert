@@ -34,7 +34,7 @@ day_before_yesterday_closing_price = day_before_yesterday_data["4. close"]
 # finding the difference between the closing prices
 difference = (float(yesterday_closing_price) - float(day_before_yesterday_closing_price))
 up_down = None
-if difference > 5:
+if difference > 0:
     up_down = "🔺"
 else:
     up_down = "🔻"
@@ -42,9 +42,8 @@ else:
 # Finding the percentage difference
 diff_percent = round((difference / float(yesterday_closing_price)) * 100)
 
-
 # Updating with news if the percentage is greater than 5 and using the news api to send articles related to the company
-if diff_percent > 1:
+if diff_percent >= 5:
     news_params = {
         "apiKey": NEWS_API_KEY,
         "qInTitle": COMPANY_NAME,
@@ -53,12 +52,11 @@ if diff_percent > 1:
     news_response = requests.get(NEWS_ENDPOINT, params=news_params)
     articles = news_response.json()["articles"]
 
-    # using the python slice operator to only send the first three articles
-    three_articles = articles[:3]
+    # using the python slice operator to only send the top article
+    top_article = articles[:1]
 
 # creating a list of the first three articles
-
-formatted_articles = [f"{STOCK_NAME}: {up_down}{diff_percent}%\n\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
+formatted_articles = [f"{STOCK_NAME}: {up_down}{diff_percent}%\n\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in top_article]
 
 # Send the message using twilio api
 client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
