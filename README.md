@@ -7,7 +7,7 @@ This app can be hosted an run 24/7 utilizing https://www.pythonanywhere.com.
 
 APIs: 
 - News API: https://newsapi.org
-- Aplphavantage API: https://www.alphavantage.co
+- Alphavantage API: https://www.alphavantage.co
 - Twilio API: https://www.twilio.com
 
 IN THE PROGRAM, THE USER WILL NEED TO UPDATE:
